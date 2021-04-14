@@ -5,6 +5,7 @@ h11==0.12.0
 peewee==3.14.4
 pycodestyle==2.7.0
 pydantic==1.8.1
+python-decouple==3.4
 starlette==0.13.6
 toml==0.10.2
 typing-extensions==3.7.4.3

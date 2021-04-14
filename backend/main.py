@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from database.db import ConfigDatabase
 from books.routers import router_book
-from ORM import ALL_MODELS
+from config import ALL_MODELS, middlewareAPI
 
 app = FastAPI(
     title='first backend',
@@ -11,6 +11,9 @@ app = FastAPI(
 
 # Routers
 app.include_router(router_book)
+
+# Middleware
+middlewareAPI(app)
 
 # create all my tables
 config = ConfigDatabase(ALL_MODELS)

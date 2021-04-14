@@ -1,12 +1,15 @@
 <template>
   <div class="home">
-    <h1>Working</h1>
+    <ListBook uno="uno" />
   </div>
 </template>
 
 <script>
+import ListBook from "./books/ListBook";
 export default {
   name: "Home",
-  components: {},
+  components: {
+    ListBook,
+  },
 };
 </script>
