@@ -2,6 +2,7 @@ from fastapi import APIRouter, status
 from .schemas import SchemasBook
 from .models import ModelBook
 from decorators.dbDecorators import itemNotFound
+from peewee import DoesNotExist
 
 router_book = APIRouter(
     prefix='/books',
@@ -26,7 +27,7 @@ async def list_book():
     """
         To view all every single **books**
     """
-    return ModelBook.select().dicts()[::]
+    return ModelBook.select().order_by(-ModelBook.id).dicts()[::]
 
 
 # RETRIEVE READ
@@ -40,7 +41,7 @@ async def get_book(id: int):
 
 
 # UPDATED
-@router_book.put('/', summary='Refresh a user', status_code=status.HTTP_202_ACCEPTED)
+@router_book.put('/{id}', summary='Refresh a user', status_code=status.HTTP_202_ACCEPTED)
 @itemNotFound
 async def update_book(id: int, request: SchemasBook):
     """
@@ -48,8 +49,10 @@ async def update_book(id: int, request: SchemasBook):
     """
     fields = [element for element in request if not element[1]
               == None]  # only fields user write
-    ModelBook.update(**dict(fields)).where(ModelBook.id == id).execute()
-    return {'Update': f'items: {id} successfully updated'}
+    if ModelBook.update(**dict(fields)).where(ModelBook.id == id).execute():
+        return {'Update': f'items: {id} successfully updated'}
+    else:
+        raise DoesNotExist
 
 
 # DELETE

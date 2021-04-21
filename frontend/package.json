@@ -4,10 +4,12 @@
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build"
+    "build": "vue-cli-service build",
+    "css": "purgecss --css src/assets/scss/custom.css --content public/index.html -o src/assets/scss/reduce.css"
   },
   "dependencies": {
     "axios": "^0.21.1",
+    "bootstrap": "^5.0.0-beta3",
     "core-js": "^3.6.5",
     "vue": "^3.0.0",
     "vue-router": "^4.0.0-0"
@@ -15,7 +17,7 @@
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.0",
     "@vue/cli-plugin-router": "~4.5.0",
-    "@vue/cli-service": "~4.5.0",
+    "@vue/cli-service": "^4.5.12",
     "@vue/compiler-sfc": "^3.0.0"
   }
 }

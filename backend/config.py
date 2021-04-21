@@ -17,4 +17,7 @@ def middlewareAPI(app: FastAPI, available=True):
         app.add_middleware(
             CORSMiddleware,
             allow_origins=config('HOST'),
+            allow_credentials=True,
+            allow_methods=["*"],
+            allow_headers=["*"],
         )
